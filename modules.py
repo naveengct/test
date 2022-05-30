@@ -5,7 +5,7 @@ from modules import *
 import os
 import numpy as np
 import altair as alt
-import plotly.graph_objects as go
+# import plotly.graph_objects as go
 
 absolute_path = os.path.abspath(__file__)
 path = os.path.dirname(absolute_path)
@@ -382,75 +382,75 @@ def over_stats():
     st.table(formatt(data))
 
 
-def win_predict_player():
-    type_  = st.sidebar.selectbox('Type', ['Batting','Bowling'])
-    team = []
-    for i in list(ipl_ball['batting_team'].unique()):
-        if i not in team_dict.values():
-            team.append(i)
-    team_1 = st.sidebar.selectbox('Team', team)
-    team_data = []
-    team_data.append(team_1)
-    if team_1 in team_dict.keys():
-        team_data.append(team_dict[team_1])
+# def win_predict_player():
+#     type_  = st.sidebar.selectbox('Type', ['Batting','Bowling'])
+#     team = []
+#     for i in list(ipl_ball['batting_team'].unique()):
+#         if i not in team_dict.values():
+#             team.append(i)
+#     team_1 = st.sidebar.selectbox('Team', team)
+#     team_data = []
+#     team_data.append(team_1)
+#     if team_1 in team_dict.keys():
+#         team_data.append(team_dict[team_1])
 
-    if type_ == 'Batting':
-        runs    = st.sidebar.number_input('Runs', step = 0, min_value = 30)
-        batsman = list(ipl_ball[ipl_ball['batting_team'].isin(team_data)]['batsman'].unique())
-        batsman.insert(0,None)
-        player  = st.sidebar.selectbox('Player',batsman)
-        opp = []
-        for i in list(ipl_ball['batting_team'].unique()):
-            if i not in team_dict.values() and i not in team_data:
-                opp.append(i)
-        opp.insert(0,None)
-        opp_inp   =  st.sidebar.selectbox('Opponent',opp)
-        opp_team = []
-        opp_team.append(opp_inp)
-        if opp_inp in team_dict.keys():
-            opp_team.append(team_dict[opp_inp])
+#     if type_ == 'Batting':
+#         runs    = st.sidebar.number_input('Runs', step = 0, min_value = 30)
+#         batsman = list(ipl_ball[ipl_ball['batting_team'].isin(team_data)]['batsman'].unique())
+#         batsman.insert(0,None)
+#         player  = st.sidebar.selectbox('Player',batsman)
+#         opp = []
+#         for i in list(ipl_ball['batting_team'].unique()):
+#             if i not in team_dict.values() and i not in team_data:
+#                 opp.append(i)
+#         opp.insert(0,None)
+#         opp_inp   =  st.sidebar.selectbox('Opponent',opp)
+#         opp_team = []
+#         opp_team.append(opp_inp)
+#         if opp_inp in team_dict.keys():
+#             opp_team.append(team_dict[opp_inp])
 
-        venue     = list(ipl_match['venue'].unique())
-        venue.insert(0,None)
-        venue_inp = st.sidebar.selectbox('Venue',venue)
-        innings   = st.sidebar.slider('Minimum Innings',1,10)
+#         venue     = list(ipl_match['venue'].unique())
+#         venue.insert(0,None)
+#         venue_inp = st.sidebar.selectbox('Venue',venue)
+#         innings   = st.sidebar.slider('Minimum Innings',1,10)
 
-        win,result = decide_batsman(ipl_ball, ipl_match, team_data, player = player, runs = runs, opp = opp_team ,venue = venue_inp, thres = innings)
-    else:
-        wickets    = st.sidebar.number_input('Wickets', step = 0, min_value = 2 )
-        bowler = list(ipl_ball[ipl_ball['bowling_team'].isin(team_data)]['bowler'].unique())
-        bowler.insert(0,None)
-        player  = st.sidebar.selectbox('Player',bowler)
-        opp = []
-        for i in list(ipl_ball['bowling_team'].unique()):
-            if i not in team_dict.values() and i not in team_data:
-                opp.append(i)
-        opp.insert(0,None)
-        opp_inp   =  st.sidebar.selectbox('Opponent',opp)
-        opp_team = []
-        opp_team.append(opp_inp)
-        if opp_inp in team_dict.keys():
-            opp_team.append(team_dict[opp_inp])
+#         win,result = decide_batsman(ipl_ball, ipl_match, team_data, player = player, runs = runs, opp = opp_team ,venue = venue_inp, thres = innings)
+#     else:
+#         wickets    = st.sidebar.number_input('Wickets', step = 0, min_value = 2 )
+#         bowler = list(ipl_ball[ipl_ball['bowling_team'].isin(team_data)]['bowler'].unique())
+#         bowler.insert(0,None)
+#         player  = st.sidebar.selectbox('Player',bowler)
+#         opp = []
+#         for i in list(ipl_ball['bowling_team'].unique()):
+#             if i not in team_dict.values() and i not in team_data:
+#                 opp.append(i)
+#         opp.insert(0,None)
+#         opp_inp   =  st.sidebar.selectbox('Opponent',opp)
+#         opp_team = []
+#         opp_team.append(opp_inp)
+#         if opp_inp in team_dict.keys():
+#             opp_team.append(team_dict[opp_inp])
 
-        venue     = list(ipl_match['venue'].unique())
-        venue.insert(0,None)
-        venue_inp = st.sidebar.selectbox('Venue',venue)
-        innings   = st.sidebar.slider('Minimum Innings',1,10)
+#         venue     = list(ipl_match['venue'].unique())
+#         venue.insert(0,None)
+#         venue_inp = st.sidebar.selectbox('Venue',venue)
+#         innings   = st.sidebar.slider('Minimum Innings',1,10)
    
-        win,result = decide_bowler(ipl_ball, ipl_match, team_data, player = player, wickets = wickets, opp = opp_team ,venue = venue_inp, thres = innings)
+#         win,result = decide_bowler(ipl_ball, ipl_match, team_data, player = player, wickets = wickets, opp = opp_team ,venue = venue_inp, thres = innings)
 
-    source = pd.DataFrame({"category": ['Win', 'Lost'], "value": [win, 1- win]})
+#     source = pd.DataFrame({"category": ['Win', 'Lost'], "value": [win, 1- win]})
 
-    st.title('Win Percent')
-    fig = go.Figure(go.Indicator(
-    mode = "gauge+number",
-    value = int(win*100),
-    domain = {'x': [0, 0.8], 'y': [0, 1]},
-    gauge = {'axis':{'range':[0,100]}, }))
-    st.plotly_chart(fig)
-    st.table(formatt(result))
+#     st.title('Win Percent')
+#     fig = go.Figure(go.Indicator(
+#     mode = "gauge+number",
+#     value = int(win*100),
+#     domain = {'x': [0, 0.8], 'y': [0, 1]},
+#     gauge = {'axis':{'range':[0,100]}, }))
+#     st.plotly_chart(fig)
+#     st.table(formatt(result))
 
-    fig.update_layout(xaxis = {'range': [0, 100]})
+#     fig.update_layout(xaxis = {'range': [0, 100]})
 
 
 
