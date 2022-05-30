@@ -6,7 +6,7 @@ import numpy as np
 import altair as alt
 
 st.set_page_config(page_title='IPL Stats @iplnani.com')
-select=st.sidebar.selectbox('Cricket Analysis',[ 'Player Stats','Team Stats','Win Prediction'])
+select=st.sidebar.selectbox('Cricket Analysis',[ 'Player Stats'])
 
 
 
