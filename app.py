@@ -4,26 +4,13 @@ from utils import *
 from modules import *
 import numpy as np
 import altair as alt
-from teamutils import *
-from teammodules import *
 
 st.set_page_config(page_title='IPL Stats @iplnani.com')
 select=st.sidebar.selectbox('Cricket Analysis',[ 'Player Stats','Team Stats','Win Prediction'])
 
-if select=='Team Stats':
-    select = st.sidebar.selectbox('Team Analysis', ['Toss Wins','Lucky Venues','Comparison between Teams','Total Runs', 'Win Count' ])
-    if select == 'Comparison between Teams':
-        compare()
-    elif select == 'Lucky Venues':
-        ven()
-    elif select == 'Total Runs':
-        totalruns()
-    elif select == 'Toss Wins':
-        tosswins()
-    elif select == 'Win Count':
-        wincount()
 
-elif select == 'Player Stats' :
+
+if select == 'Player Stats' :
     select = st.sidebar.selectbox('Analysis', ['Player Career','Overall Stats','Seasonal Stats', 'One Vs One','Over Stats' ])
     if select == 'Player Career':
         player_career()
